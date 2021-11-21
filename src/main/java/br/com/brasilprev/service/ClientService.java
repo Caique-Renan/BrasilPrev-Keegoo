@@ -20,7 +20,6 @@ public class ClientService {
 	private ClientRepository clientRepository;
 
 	// TODO: Add Comentarios e Documentacao
-	// TODO: Terminar o CRUD
 	// TODO: Se possivel, Add Autenticacao do usuario... como preferir
 	/**
 	 * 
@@ -31,6 +30,20 @@ public class ClientService {
 		List<ClientEntity> clientList = clientRepository.findAll();
 		log.info("Numero de Clientes encontrados: {}", clientList.size());
 		return clientList;
+	}
+	
+	public ClientEntity findClientById(Long id) {
+
+		ClientEntity clientFound = new ClientEntity();
+		Optional<ClientEntity> clientFoundOp = clientRepository.findById(id);
+		
+		if(clientFoundOp.isPresent()) {
+			clientFound = clientFoundOp.get();
+		} else {
+			new Exception("Cliente nao encontado");
+		}
+		
+		return clientFound;
 	}
 
 	public ClientEntity saveClient(ClientEntity clientRequest) {
@@ -51,7 +64,6 @@ public class ClientService {
 	}
 
 	public void upadteClient(ClientEntity clientRequest) {
-		// TODO: Estudar Optional
 		Optional<ClientEntity> clientFound = clientRepository.findById(clientRequest.getId());
 		
 		// MapStruct

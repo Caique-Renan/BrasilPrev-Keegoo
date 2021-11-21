@@ -18,7 +18,13 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	
+	// TODO: Add Comentarios e Documentacao
+	// TODO: Terminar o CRUD
+	// TODO: Se possivel, Add Autenticacao do usuario... como preferir
+	/**
+	 * 
+	 * @return
+	 */
 	public List<ClientEntity> listar() {
 
 		List<ClientEntity> clientList = clientRepository.findAll();
@@ -31,5 +37,7 @@ public class ClientService {
 		log.info("Cliente criado com sucesso, com os parametros: {} ", save.toString());
 		return save;
 	}
+	
+	
 
 }

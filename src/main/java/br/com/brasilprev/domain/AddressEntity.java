@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TB_ADDRESS")
 public class AddressEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "CODE_ZIP")
@@ -43,6 +45,59 @@ public class AddressEntity {
 		this.addressName = addressName;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCodeZip() {
+		return codeZip;
+	}
+
+	public void setCodeZip(String codeZip) {
+		this.codeZip = codeZip;
+	}
+
+	public String getAddressState() {
+		return addressState;
+	}
+
+	public void setAddressState(String addressState) {
+		this.addressState = addressState;
+	}
+
+	public String getAddressCity() {
+		return addressCity;
+	}
+
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
+	}
+
+	public String getAddressDistrict() {
+		return addressDistrict;
+	}
+
+	public void setAddressDistrict(String addressDistrict) {
+		this.addressDistrict = addressDistrict;
+	}
+
+	public String getAddressName() {
+		return addressName;
+	}
+
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"AddressEntity [id=%s, codeZip=%s, addressState=%s, addressCity=%s, addressDistrict=%s, addressName=%s]",
+				id, codeZip, addressState, addressCity, addressDistrict, addressName);
+	}
 
 }

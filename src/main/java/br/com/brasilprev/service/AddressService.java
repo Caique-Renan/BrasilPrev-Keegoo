@@ -18,11 +18,21 @@ public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 
+	/**
+	 * This method retrieves all users from the bank.
+	 * @return Client List.
+	 */
 	public List<AddressEntity> listar() {
 		
 		List<AddressEntity> addressList = addressRepository.findAll();
 		log.info("O numero de Enderecos e: {}", addressList.size());
 		return addressList;
+	}
+
+	public AddressEntity salvar(AddressEntity addressRequest) {
+		AddressEntity save = addressRepository.save(addressRequest);
+		log.info("Endereco criado com sucesso, com os parametros: {} ", save.toString());
+		return save;
 	}
 
 }

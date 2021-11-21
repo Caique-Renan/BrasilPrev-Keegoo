@@ -25,5 +25,11 @@ public class ClientService {
 		log.info("Numero de Clientes encontrados: {}", clientList.size());
 		return clientList;
 	}
+	
+	public ClientEntity salvar(ClientEntity clientRequest) {
+		ClientEntity save = clientRepository.save(clientRequest);
+		log.info("Cliente criado com sucesso, com os parametros: {} ", save.toString());
+		return save;
+	}
 
 }

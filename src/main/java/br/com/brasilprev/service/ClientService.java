@@ -19,32 +19,49 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	// TODO: Add Comentarios e Documentacao
-	// TODO: Se possivel, Add Autenticacao do usuario... como preferir
 	/**
 	 * 
 	 * @return
 	 */
+
+	/**
+	 * This method is responsible for the customer listing service.
+	 * 
+	 * @return Client list.
+	 */
+
 	public List<ClientEntity> listClient() {
 
 		List<ClientEntity> clientList = clientRepository.findAll();
 		log.info("Numero de Clientes encontrados: {}", clientList.size());
 		return clientList;
 	}
-	
+
+	/**
+	 * This method is responsible for searching customers by id.
+	 * 
+	 * @return Client find.
+	 */
+
 	public ClientEntity findClientById(Long id) {
 
 		ClientEntity clientFound = new ClientEntity();
 		Optional<ClientEntity> clientFoundOp = clientRepository.findById(id);
-		
-		if(clientFoundOp.isPresent()) {
+
+		if (clientFoundOp.isPresent()) {
 			clientFound = clientFoundOp.get();
 		} else {
 			new Exception("Cliente nao encontado");
 		}
-		
+
 		return clientFound;
 	}
+
+	/**
+	 * This method is responsible for the customer rescue service.
+	 * 
+	 * @return Client save.
+	 */
 
 	public ClientEntity saveClient(ClientEntity clientRequest) {
 		ClientEntity save = clientRepository.save(clientRequest);
@@ -52,45 +69,55 @@ public class ClientService {
 		return save;
 	}
 
+	/**
+	 * This method is responsible for the "delete" service within clients.
+	 * 
+	 * @return Client delete.
+	 */
+
 	public void deleteClient(Long id) {
-		// TODO: Estudar Optional
 		try {
 			clientRepository.deleteById(id);
-			
+
 		} catch (Exception e) {
 			new Exception("Cliente nao encontado");
 		}
-		
+
 	}
+
+	/**
+	 * This method is responsible for the customer update service.
+	 * 
+	 * @return Client update.
+	 */
 
 	public void upadteClient(ClientEntity clientRequest) {
 		Optional<ClientEntity> clientFound = clientRepository.findById(clientRequest.getId());
-		
+
 		// MapStruct
-		if(clientFound.isPresent()) {
+		if (clientFound.isPresent()) {
 			ClientEntity clientEntity = clientFound.get();
-			
-			if(null != clientRequest.getCpf()) {
+
+			if (null != clientRequest.getCpf()) {
 				clientEntity.setCpf(clientRequest.getCpf());
-				
-			}
-			
-			if(null != clientRequest.getClientName()) {
-				clientEntity.setClientName(clientRequest.getClientName());
-				
+
 			}
 
-			if(null != clientRequest.getAddressList()) {
-				clientEntity.setAddressList(clientRequest.getAddressList());
-				
+			if (null != clientRequest.getClientName()) {
+				clientEntity.setClientName(clientRequest.getClientName());
+
 			}
-			
+
+			if (null != clientRequest.getAddressList()) {
+				clientEntity.setAddressList(clientRequest.getAddressList());
+
+			}
+
 			clientRepository.save(clientEntity);
 		} else {
 			new Exception("Cliente nao encontado");
 		}
-		
-		
+
 	}
 
 }

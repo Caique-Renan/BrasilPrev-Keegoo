@@ -23,10 +23,22 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
+	
+	/**
+	 * This is the method responsable of the control List.
+	 * @return Address list.
+	 */
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity <List<AddressEntity>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(addressService.listar());
 	}
+	
+	
+	/**
+	 * This is the method responsable of the save control.
+	 * @return Address save.
+	 */
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Validated @RequestBody AddressEntity addressRequest) {

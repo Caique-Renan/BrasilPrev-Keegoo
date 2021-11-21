@@ -20,7 +20,7 @@ public class AddressService {
 
 	/**
 	 * This method retrieves all users from the bank.
-	 * @return Client List.
+	 * @return Address List.
 	 */
 	public List<AddressEntity> listar() {
 		
@@ -28,6 +28,11 @@ public class AddressService {
 		log.info("O numero de Enderecos e: {}", addressList.size());
 		return addressList;
 	}
+	
+	/**
+	 * This method save the address of the client on tha bank.
+	 * @return Address save.
+	 */
 
 	public AddressEntity salvar(AddressEntity addressRequest) {
 		AddressEntity save = addressRepository.save(addressRequest);

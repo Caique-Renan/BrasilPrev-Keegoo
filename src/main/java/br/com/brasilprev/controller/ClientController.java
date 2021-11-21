@@ -29,10 +29,9 @@ public class ClientController {
 	 * This is the method responsable of the control List.
 	 * @return Client list.
 	 */
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClientEntity>> listar() {
-		return ResponseEntity.status(HttpStatus.OK).body(clientService.listar());
+		return ResponseEntity.status(HttpStatus.OK).body(clientService.listClient());
 	}
 
 	
@@ -40,15 +39,25 @@ public class ClientController {
 	 * This is the method responsable of the save control.
 	 * @return Client save.
 	 */
-	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Validated @RequestBody ClientEntity clientRequest) {
-		clientRequest = clientService.salvar(clientRequest);
+		clientRequest = clientService.saveClient(clientRequest);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clientRequest.getId())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public void atualizar(@RequestBody ClientEntity clientRequest) {
+		clientService.upadteClient(clientRequest);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deletar(@PathVariable("id") Long id) {
+		clientService.deleteClient(id);
+	}
+	
 
 }
